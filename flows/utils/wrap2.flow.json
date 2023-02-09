@@ -1,0 +1,13 @@
+{
+    "label": "flow test",
+    "version": "1.0.0",
+    "description": "flow test",
+    "nodes": [
+        {
+            "name": "step1",
+            "process": "flows.utils.echo",
+            "script": "script1"
+        }
+    ],
+    "output": {}
+}

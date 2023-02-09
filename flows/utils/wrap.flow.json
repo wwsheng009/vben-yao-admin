@@ -1,0 +1,23 @@
+{
+    "label": "wrap the Response",
+    "version": "1.0.0",
+    "description": "wrap the Response",
+    "nodes": [
+        {
+            "name": "wrap_ok",
+            "script": "ok",
+            "outs": [
+                "{{$out}}",
+                "test output"
+            ]
+        },
+        {
+            "name": "wrap_fail",
+            "script": "fail"
+        },
+        {
+            "name": "wrap_done",
+            "script": "done"
+        }
+    ]
+}

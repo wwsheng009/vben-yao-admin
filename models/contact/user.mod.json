@@ -1,0 +1,273 @@
+{
+  "name": "用户表",
+  "table": {
+    "name": "user",
+    "comment": "用户表",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    {
+      "label": "ID",
+      "name": "id",
+      "type": "ID",
+      "primary": true
+    },
+    {
+      "label": "用户名字",
+      "name": "name",
+      "type": "string",
+      "length": 80,
+      "comment": "Name",
+      "index": true,
+      "nullable": true,
+      "validations": [
+        {
+          "method": "typeof",
+          "args": [
+            "string"
+          ],
+          "message": "{{input}} Error"
+        }
+      ]
+    },
+    {
+      "label": "英文名",
+      "name": "en_name",
+      "type": "string",
+      "length": 255,
+      "comment": "英文名",
+      "nullable": true
+    },
+    {
+      "label": "工号",
+      "name": "job_number",
+      "type": "string",
+      "length": 255,
+      "comment": "工号",
+      "nullable": true
+    },
+    {
+      "label": "UnionID",
+      "name": "union_id",
+      "type": "string",
+      "length": 50,
+      "comment": "用户union_id",
+      "unique": true,
+      "nullable": true
+    },
+    {
+      "label": "OpenID",
+      "name": "open_id",
+      "type": "string",
+      "length": 256,
+      "comment": "OpenID",
+      "unique": true,
+      "nullable": true
+    },
+    {
+      "label": "电子邮箱",
+      "name": "email",
+      "type": "string",
+      "length": 50,
+      "comment": "Email",
+      "unique": true,
+      "nullable": true,
+      "validations": [
+        {
+          "method": "email",
+          "args": [],
+          "message": "{{input}} should be email"
+        }
+      ]
+    },
+    {
+      "label": "组织电子邮箱",
+      "name": "org_email",
+      "type": "string",
+      "length": 50,
+      "comment": "Email",
+      "unique": true,
+      "nullable": true,
+      "validations": [
+        {
+          "method": "email",
+          "args": [],
+          "message": "{{input}} should be email"
+        }
+      ]
+    },
+    {
+      "label": "电话号码",
+      "name": "mobile",
+      "type": "string",
+      "length": 50,
+      "comment": "电话号码",
+      "unique": true,
+      "nullable": true
+    },
+    {
+      "label": "座机号码",
+      "name": "telephone",
+      "type": "string",
+      "length": 50,
+      "comment": "电话号码",
+      "nullable": true
+    },
+    {
+      "label": "头像",
+      "name": "avatar",
+      "type": "json",
+      "comment": "头像",
+      "nullable": true
+    },
+    {
+      "label": "工作职位",
+      "name": "position",
+      "type": "string",
+      "length": 255,
+      "comment": "职位",
+      "nullable": true
+    },
+    {
+      "label": "工作地点",
+      "name": "work_place",
+      "type": "string",
+      "length": 255,
+      "comment": "工作地点",
+      "nullable": true
+    },
+    {
+      "label": "密码",
+      "name": "password",
+      "type": "string",
+      "length": 256,
+      "comment": "Password",
+      "crypt": "PASSWORD",
+      "index": true,
+      "nullable": true,
+      "validations": [
+        {
+          "method": "typeof",
+          "args": [
+            "string"
+          ],
+          "message": "{{input}} Error"
+        },
+        {
+          "method": "minLength",
+          "args": [
+            6
+          ],
+          "message": "{{label}} Error"
+        },
+        {
+          "method": "maxLength",
+          "args": [
+            18
+          ],
+          "message": "{{label}} Error"
+        }
+      ]
+    },
+    {
+      "label": "TwoFactorPassword",
+      "name": "password2nd",
+      "type": "string",
+      "length": 256,
+      "comment": "TwoFactorPassword",
+      "crypt": "PASSWORD",
+      "index": true,
+      "nullable": true,
+      "validations": [
+        {
+          "method": "typeof",
+          "args": [
+            "string"
+          ],
+          "message": "{{input}} Error, {{label}}Error"
+        }
+      ]
+    },
+    {
+      "label": "昵称",
+      "name": "nickname",
+      "type": "string",
+      "length": 80,
+      "comment": "昵称",
+      "index": true,
+      "nullable": true,
+      "validations": [
+        {
+          "method": "typeof",
+          "args": [
+            "string"
+          ],
+          "message": "{{input}} Error"
+        }
+      ]
+    },
+    {
+      "label": "备注",
+      "name": "extra",
+      "type": "json",
+      "comment": "备注",
+      "nullable": true
+    },
+    {
+      "label": "性别",
+      "comment": "性别",
+      "name": "gender",
+      "type": "enum",
+      "default": "未知",
+      "option": [
+        "男",
+        "女",
+        "未知"
+      ],
+      "index": true
+    },
+    {
+      "label": "所属部门",
+      "name": "department_id",
+      "type": "integer",
+      "comment": "所属部门",
+      "nullable": true
+    },
+    {
+      "label": "状态",
+      "comment": "状态",
+      "name": "status",
+      "type": "enum",
+      "default": "enabled",
+      "option": [
+        "enabled",
+        "disabled"
+      ],
+      "index": true,
+      "validations": [
+        {
+          "method": "typeof",
+          "args": [
+            "string"
+          ],
+          "message": "{{input}} Error, {{label}} should be string"
+        },
+        {
+          "method": "enum",
+          "args": [
+            "enabled",
+            "disabled"
+          ],
+          "message": "{{input}} Error, {{label}} should be enabled/disabled"
+        }
+      ]
+    }
+  ],
+  "relations": {},
+  "values": [],
+  "indexes": [],
+  "option": {
+    "timestamps": true,
+    "soft_deletes": true
+  }
+}

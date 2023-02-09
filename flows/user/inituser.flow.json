@@ -1,0 +1,15 @@
+{
+    "label": "Token",
+    "version": "1.0.0",
+    "description": "JWT Token",
+    "nodes": [
+        {
+            "name": "Insert User",
+            "process": "models.contact.user.Insert",
+            "args": [
+                "{{$res.User.columns}}",
+                "{{$res.User.values}}"
+            ]
+        }
+    ]
+}

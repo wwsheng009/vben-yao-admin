@@ -1,0 +1,97 @@
+{
+  "label": "Token",
+  "version": "1.0.0",
+  "description": "JWT Token",
+  "nodes": [
+    {
+      "name": "User",
+      "engine": "xiang",
+      "query": {
+        "select": [
+          "id",
+          "mobile",
+          "name",
+          "nickname as desc",
+          "nickname as realName"
+        ],
+        "from": "$contact.user",
+        "wheres": [
+          {
+            ":id": "id",
+            "=": "?:$in.0"
+          }
+        ],
+        "limit": 1
+      }
+    },
+    {
+      "name": "User2",
+      "process": "models.contact.user.Get",
+      "comment": "这个无法修改column的名称",
+      "args": [
+        {
+          "select": [
+            "id",
+            "mobile",
+            "name",
+            "nickname"
+          ],
+          "wheres": [
+            {
+              "column": "id",
+              "value": "?:$in.0"
+            }
+          ],
+          "limit": 1
+        }
+      ]
+    },
+    {
+      "name": "Menu",
+      "process": "flows.xiang.menu",
+      "args": [
+        "{{$res.User.0.id}}"
+      ]
+    },
+    {
+      "name": "SID",
+      "process": "session.start"
+    },
+    {
+      "name": "JWT",
+      "process": "xiang.helper.JWTMake",
+      "args": [
+        "{{$res.User.0.id}}",
+        {},
+        {
+          "timeout": 3600,
+          "sid": "{{$res.SID}}"
+        }
+      ]
+    },
+    {
+      "name": "Set User Data",
+      "process": "session.set",
+      "args": [
+        "user",
+        "{{$res.User.0}}"
+      ]
+    },
+    {
+      "name": "Set User ID",
+      "process": "session.set",
+      "args": [
+        "user_id",
+        "{{$res.User.0.id}}"
+      ]
+    }
+  ],
+  "output": {
+    "sid": "{{$res.SID}}",
+    "user": "{{$res.User.0}}",
+    "roles": [],
+    "menus": "{{$res.Menu}}",
+    "token": "{{$res.JWT.token}}",
+    "expires_at": "{{$res.JWT.expires_at}}"
+  }
+}

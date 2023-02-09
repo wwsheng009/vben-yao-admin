@@ -1,0 +1,52 @@
+[
+	{
+		"name": "Shoes",
+		"parent_id": null,
+		"order": 7
+	},
+	{
+		"name": "Electronics",
+		"parent_id": 1,
+		"order": 8
+	},
+	{
+		"name": "Movies",
+		"parent_id": 2,
+		"order": 5
+	},
+	{
+		"name": "Movies",
+		"parent_id": 3,
+		"order": 1
+	},
+	{
+		"name": "Beauty",
+		"parent_id": 4,
+		"order": 9
+	},
+	{
+		"name": "Industrial",
+		"parent_id": 5,
+		"order": 7
+	},
+	{
+		"name": "Home",
+		"parent_id": 6,
+		"order": 4
+	},
+	{
+		"name": "Tools",
+		"parent_id": 7,
+		"order": 4
+	},
+	{
+		"name": "Sports",
+		"parent_id": 8,
+		"order": 9
+	},
+	{
+		"name": "Automotive",
+		"parent_id": 9,
+		"order": 7
+	}
+]

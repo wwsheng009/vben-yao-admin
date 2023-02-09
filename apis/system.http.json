@@ -1,0 +1,72 @@
+{
+    "name": "User API",
+    "version": "1.0.0",
+    "description": "User API",
+    "group": "vben/system",
+    "guard": "bearer-jwt",
+    "paths": [
+        {
+            "path": "/getDeptList",
+            "method": "GET",
+            "process": "flows.system.dept",
+            "out": {
+                "status": 200,
+                "type": "application/json"
+            }
+        },
+        {
+            "path": "/getAccountList",
+            "method": "GET",
+            "process": "flows.system.account",
+            "out": {
+                "status": 200,
+                "type": "application/json"
+            }
+        },
+        {
+            "path": "/getRoleListByPage",
+            "method": "GET",
+            "process": "flows.system.role",
+            "out": {
+                "status": 200,
+                "type": "application/json"
+            }
+        },
+        {
+            "path": "/getAllRoleList",
+            "method": "GET",
+            "process": "flows.system.role",
+            "out": {
+                "status": 200,
+                "type": "application/json"
+            }
+        },
+        {
+            "path": "/setRoleStatus",
+            "method": "GET",
+            "process": "flows.system.role",
+            "out": {
+                "status": 200,
+                "type": "application/json"
+            }
+        },
+        {
+            "path": "/getMenuList",
+            "method": "GET",
+            "process": "flows.system.menu",
+            "out": {
+                "status": 200,
+                "type": "application/json"
+            }
+        },
+        {
+            "path": "/accountExist",
+            "method": "GET",
+            "process": "flows.system.menu",
+            "out": {
+                "status": 200,
+                "type": "application/json"
+            }
+        }
+    ]
+}

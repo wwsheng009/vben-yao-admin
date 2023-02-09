@@ -1,0 +1,27 @@
+{
+      "label": "Import Demo Data",
+      "version": "1.0.0",
+      "description": "Import Demo Data",
+      "nodes": [
+            {
+                  "name": "Data",
+                  "script": "data"
+            },
+            {
+                  "name": "User",
+                  "process": "xiang.helper.ArraySplit",
+                  "args": [
+                        "{{$res.Data.user}}"
+                  ]
+            },
+            {
+                  "name": "Insert User",
+                  "process": "models.contact.user.Insert",
+                  "args": [
+                        "{{$res.User.columns}}",
+                        "{{$res.User.values}}"
+                  ]
+            }
+      ],
+      "output": {}
+}

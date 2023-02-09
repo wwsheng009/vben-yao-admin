@@ -1,0 +1,58 @@
+{
+  "name": "APP Menu",
+  "nodes": [],
+  "output": {
+    "setting": [
+      {
+        "icon": "icon-settings",
+        "id": 999999,
+        "name": "设置",
+        "path": "/x/Form/pet/1/edit",
+        "dot": true,
+        "children": [
+          {
+            "id": 10002,
+            "name": "系统设置",
+            "path": "/setting"
+          },
+          {
+            "id": 10003,
+            "name": "菜单配置",
+            "path": "/x/Table/system.menu"
+          }
+        ]
+      }
+    ],
+    "items": [
+      {
+        "blocks": 0,
+        "icon": "icon-book",
+        "id": 900,
+        "name": "行政",
+        "parent": null,
+        "path": "/x/Table/contact.user",
+        "visible_menu": 1,
+        "children": [
+          {
+            "blocks": 0,
+            "icon": "icon-book",
+            "name": "员工",
+            "id": 910,
+            "parent": 900,
+            "path": "/x/Table/contact.user",
+            "visible_menu": 1
+          },
+          {
+            "blocks": 0,
+            "icon": "icon-book",
+            "name": "部门列表",
+            "id": 920,
+            "parent": 900,
+            "path": "/x/Table/contact.department",
+            "visible_menu": 1
+          }
+        ]
+      }
+    ]
+  }
+}

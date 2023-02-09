@@ -1,0 +1,16 @@
+{
+  "name": "::User Login",
+  "action": {
+    "process": "scripts.login.User",
+    "args": [
+      ":payload"
+    ]
+  },
+  "layout": {
+    "entry": "/x/Table/contact.user",
+    "slogan": "让世界更美好",
+    "captcha": "yao.utils.Captcha",
+    "site": "http://www.baidu.com",
+    "cover": "http://localhost:5099/img/cover.svg"
+  }
+}

@@ -1,0 +1,10 @@
+{
+    "name": "系统菜单设置",
+    "version": "1.0.0",
+    "decription": "系统菜单设置",
+    "action": {
+        "bind": {
+            "model": "xiang.menu"
+        }
+    }
+}
