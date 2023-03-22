@@ -4,7 +4,10 @@
     "decription": "菜单设置",
     "action": {
         "bind": {
-            "model": "xiang.user"
+            "model": "xiang.user",
+            "option": {
+                "form": "yao.user"
+            }
         }
     }
 }

@@ -2,9 +2,7 @@
   "name": "::User Login",
   "action": {
     "process": "scripts.login.User",
-    "args": [
-      ":payload"
-    ]
+    "args": [":payload"]
   },
   "layout": {
     "entry": "/x/Table/contact.user",

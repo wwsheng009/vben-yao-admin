@@ -30,12 +30,7 @@
       "comment": "这个无法修改column的名称",
       "args": [
         {
-          "select": [
-            "id",
-            "mobile",
-            "name",
-            "nickname"
-          ],
+          "select": ["id", "mobile", "name", "nickname"],
           "wheres": [
             {
               "column": "id",
@@ -49,9 +44,7 @@
     {
       "name": "Menu",
       "process": "flows.xiang.menu",
-      "args": [
-        "{{$res.User.0.id}}"
-      ]
+      "args": ["{{$res.User.0.id}}"]
     },
     {
       "name": "SID",
@@ -72,18 +65,12 @@
     {
       "name": "Set User Data",
       "process": "session.set",
-      "args": [
-        "user",
-        "{{$res.User.0}}"
-      ]
+      "args": ["user", "{{$res.User.0}}"]
     },
     {
       "name": "Set User ID",
       "process": "session.set",
-      "args": [
-        "user_id",
-        "{{$res.User.0.id}}"
-      ]
+      "args": ["user_id", "{{$res.User.0.id}}"]
     }
   ],
   "output": {
