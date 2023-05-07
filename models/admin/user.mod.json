@@ -80,7 +80,6 @@
       "length": 50,
       "comment": "手机号",
       "nullable": true,
-      "crypt": "AES",
       "validations": [
         {
           "method": "mobile",
@@ -88,6 +87,14 @@
           "message": "{{input}}格式错误"
         }
       ]
+    },
+    {
+      "label": "电话号码",
+      "name": "phone",
+      "type": "string",
+      "length": 50,
+      "comment": "电话号码",
+      "nullable": true
     },
     {
       "label": "登录密码",
@@ -152,6 +159,38 @@
       ]
     },
     {
+      "label": "头衔",
+      "name": "title",
+      "type": "string",
+      "length": 80,
+      "comment": "头衔",
+      "nullable": true
+    },
+    {
+      "label": "部门",
+      "name": "group",
+      "type": "string",
+      "length": 200,
+      "comment": "部门",
+      "nullable": true
+    },
+    {
+      "label": "地址",
+      "name": "address",
+      "type": "string",
+      "length": 200,
+      "comment": "地址",
+      "nullable": true
+    },
+    {
+      "label": "国家",
+      "name": "country",
+      "type": "string",
+      "length": 200,
+      "comment": "国家",
+      "nullable": true
+    },
+    {
       "label": "性别",
       "comment": "性别",
       "name": "gender",
@@ -191,10 +230,25 @@
       "nullable": true
     },
     {
-      "label": "备注",
-      "name": "remark",
+      "label": "签名",
+      "name": "signature",
       "type": "string",
-      "comment": "备注",
+      "comment": "签名",
+      "length": 200,
+      "nullable": true
+    },
+    {
+      "label": "标签",
+      "name": "tags",
+      "type": "json",
+      "comment": "标签",
+      "nullable": true
+    },
+    {
+      "label": "简介",
+      "name": "introduction",
+      "type": "string",
+      "comment": "简介",
       "length": 200,
       "nullable": true
     }

@@ -1,0 +1,31 @@
+{
+  "name": "存储接口",
+  "version": "1.0.0",
+  "description": "存储接口API",
+  "group": "vben",
+  "guard": "bearer-jwt",
+  "paths": [
+    {
+      "path": "/upload",
+      "method": "POST",
+      "process": "scripts.file.upload",
+      "in": ["$file.file"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/download",
+      "method": "GET",
+      "guard": "-",
+      "process": "fs.system.Download",
+      "in": ["$query.name"],
+      "out": {
+        "status": 200,
+        "body": "{{content}}",
+        "headers": { "Content-Type": "{{type}}" }
+      }
+    }
+  ]
+}

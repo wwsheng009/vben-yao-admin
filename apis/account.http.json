@@ -1,0 +1,18 @@
+{
+  "name": "User API",
+  "version": "1.0.0",
+  "description": "User API",
+  "group": "vben/account",
+  "guard": "bearer-jwt",
+  "paths": [
+    {
+      "path": "/getAccountInfo",
+      "method": "GET",
+      "process": "scripts.account.AccountInfo",
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    }
+  ]
+}
