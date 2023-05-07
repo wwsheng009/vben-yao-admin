@@ -20,7 +20,7 @@
       "path": "/login",
       "method": "POST",
       "guard": "-",
-      "process": "flows.login.password",
+      "process": "scripts.login.Password",
       "in": [":payload"],
       "out": {
         "status": 200,
@@ -29,6 +29,16 @@
     },
     {
       "path": "/inspect",
+      "method": "GET",
+      "process": "session.Get",
+      "in": ["user"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/info",
       "method": "GET",
       "process": "session.Get",
       "in": ["user"],

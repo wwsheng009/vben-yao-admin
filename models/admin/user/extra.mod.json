@@ -8,6 +8,7 @@
   "columns": [
     { "label": "ID", "name": "id", "type": "ID" },
     { "label": "user id", "name": "user_id", "type": "integer" },
+
     {
       "label": "英文名",
       "name": "en_name",

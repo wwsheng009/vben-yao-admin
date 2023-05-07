@@ -28,6 +28,26 @@ function user() {
   const rc = Process("models.admin.user.Insert", map.columns, map.values);
 }
 
+// scripts.demo.role
+function role() {
+  const result = [];
+  for (let index = 0; index < 4; index++) {
+    result.push({
+      id: index + 1,
+      orderNo: `${index + 1}`,
+      roleName: ["超级管理员", "管理员", "文章管理员", "普通用户"][index],
+      roleValue: ["超级管理员", "管理员", "文章管理员", "普通用户"][index],
+      remark: "测试",
+      menu: [["0", "1", "2"], ["0", "1"], ["0", "2"], ["2"]][index],
+      status: ["0", "1"][1],
+    });
+  }
+
+  const map = Process("xiang.helper.ArraySplit", result);
+
+  const rc = Process("models.admin.role.Insert", map.columns, map.values);
+}
+
 // scripts.demo.dept
 function dept() {
   const dept = [
@@ -180,4 +200,62 @@ function dept() {
       parentDept: id,
     });
   });
+}
+
+// scripts.demo.menu
+function menu() {
+  for (let index = 0; index < 3; index++) {
+    const menu = {
+      // id: `${index}`,
+      icon: ["ion:layers-outline", "ion:git-compare-outline", "ion:tv-outline"][
+        index
+      ],
+      component: "LAYOUT",
+      type: "0",
+      menuName: ["Dashboard", "权限管理", "功能"][index],
+      permission: "",
+      orderNo: index + 1,
+      status: "0",
+    };
+    const menuid = Process("models.admin.menu.create", menu);
+    for (let j = 0; j < 4; j++) {
+      const submenu = {
+        parentMenu: menuid,
+        // id: `${index}-${j}`,
+        type: "1",
+        menuName: ["菜单1", "菜单2", "菜单3", "菜单4"][j],
+        icon: "ion:document",
+        permission: ["menu1:view", "menu2:add", "menu3:update", "menu4:del"][
+          index
+        ],
+        routePath: [
+          "/dashboard/welcome/index",
+          "/dashboard/analysis/index",
+          "/dashboard/workbench/index",
+          "/dashboard/test/index",
+        ][j],
+        orderNo: j + 1,
+        component: "LAYOUT",
+        status: "0",
+      };
+      const submenuid = Process("models.admin.menu.create", submenu);
+
+      for (let k = 0; k < 4; k++) {
+        const subsubmenu = {
+          // id: `${index}-${j}-${k}`,
+          type: "2",
+          menuName: "按钮" + (j + 1) + "-" + (k + 1),
+          icon: "",
+          permission:
+            ["menu1:view", "menu2:add", "menu3:update", "menu4:del"][index] +
+            ":btn" +
+            (k + 1),
+          orderNo: j + 1,
+          status: "0",
+          parentMenu: submenuid,
+        };
+        Process("models.admin.menu.create", subsubmenu);
+      }
+    }
+  }
 }

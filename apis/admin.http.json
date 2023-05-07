@@ -17,7 +17,13 @@
     {
       "path": "/getAccountList",
       "method": "GET",
-      "process": "scripts.system.Acount",
+      "process": "scripts.system.AcountList",
+      "in": [
+        "$query.page",
+        "$query.pageSize",
+        "$query.deptId",
+        "$query.account"
+      ],
       "out": {
         "status": 200,
         "type": "application/json"
@@ -26,7 +32,7 @@
     {
       "path": "/getRoleListByPage",
       "method": "GET",
-      "process": "flows.system.role",
+      "process": "scripts.system.RoleList",
       "out": {
         "status": 200,
         "type": "application/json"
@@ -43,8 +49,9 @@
     },
     {
       "path": "/setRoleStatus",
-      "method": "GET",
+      "method": "POST",
       "process": "scripts.system.SetRoleStatus",
+      "in": [":payload"],
       "out": {
         "status": 200,
         "type": "application/json"
@@ -61,7 +68,7 @@
     },
     {
       "path": "/accountExist",
-      "method": "GET",
+      "method": "POST",
       "process": "scripts.system.AcountExist",
       "out": {
         "status": 200,

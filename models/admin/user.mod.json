@@ -54,22 +54,6 @@
       ]
     },
     {
-      "label": "英文名",
-      "name": "en_name",
-      "type": "string",
-      "length": 255,
-      "comment": "英文名",
-      "nullable": true
-    },
-    {
-      "label": "工号",
-      "name": "job_number",
-      "type": "string",
-      "length": 255,
-      "comment": "工号",
-      "nullable": true
-    },
-    {
       "label": "邮箱",
       "name": "email",
       "type": "string",
@@ -178,9 +162,16 @@
     },
     {
       "label": "所属部门",
-      "name": "department_id",
+      "name": "dept_id",
       "type": "integer",
       "comment": "所属部门",
+      "nullable": true
+    },
+    {
+      "label": "角色",
+      "name": "role",
+      "type": "integer",
+      "comment": "角色",
       "nullable": true
     },
     {
@@ -192,23 +183,20 @@
     },
     {
       "label": "状态",
-      "comment": "用户状态 enabled 有效, disabled 无效",
       "name": "status",
       "type": "enum",
-      "default": "enabled",
-      "option": ["enabled", "disabled"],
-      "validations": [
-        {
-          "method": "typeof",
-          "args": ["string"],
-          "message": "{{input}}类型错误, {{label}}应该为字符串"
-        },
-        {
-          "method": "enum",
-          "args": ["enabled", "disabled"],
-          "message": "{{input}}不在许可范围, {{label}}应该为 enabled/disabled"
-        }
-      ]
+      "comment": "状态",
+      "default": "0",
+      "option": ["1", "0"],
+      "nullable": true
+    },
+    {
+      "label": "备注",
+      "name": "remark",
+      "type": "string",
+      "comment": "备注",
+      "length": 200,
+      "nullable": true
     }
   ],
   "relations": {},
@@ -219,7 +207,7 @@
       "email": "test@yao.com",
       "mobile": null,
       "password": "A123456p+",
-      "status": "enabled"
+      "status": "1"
     },
     {
       "name": "员工",
@@ -227,7 +215,7 @@
       "email": "staff@yao.com",
       "mobile": null,
       "password": "S123456p+",
-      "status": "enabled"
+      "status": "1"
     },
     {
       "name": "用户",
@@ -235,7 +223,7 @@
       "email": null,
       "mobile": "13900001111",
       "password": "U123456p+",
-      "status": "enabled"
+      "status": "1"
     },
     {
       "name": "机器人",
@@ -243,7 +231,7 @@
       "email": null,
       "mobile": null,
       "password": null,
-      "status": "enabled"
+      "status": "1"
     }
   ],
   "option": { "timestamps": true, "soft_deletes": false }

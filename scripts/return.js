@@ -1,3 +1,4 @@
+//scripts.return.Success
 function Success(data) {
   return {
     code: 0,
@@ -6,7 +7,7 @@ function Success(data) {
     result: data,
   };
 }
-
+//scripts.return.Error "密码不正确","403","密码不正确"
 function Error(data, code, message) {
   let vcode = code;
   let vmessage = message;

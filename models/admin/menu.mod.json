@@ -7,25 +7,45 @@
   },
   "columns": [
     {
+      "label": "id",
       "name": "id",
       "type": "ID",
       "comment": "ID"
     },
     {
-      "name": "parent",
+      "label": "父节点",
+      "name": "parentMenu",
       "type": "bigInteger",
       "comment": "父节点",
       "nullable": true,
       "index": true
     },
     {
-      "name": "name",
+      "label": "名称",
+      "name": "menuName",
       "type": "string",
       "length": 200,
       "comment": "名称",
       "index": true
     },
     {
+      "label": "组件",
+      "name": "component",
+      "type": "string",
+      "length": 200,
+      "comment": "组件",
+      "nullable": true
+    },
+    {
+      "label": "类型",
+      "name": "type",
+      "type": "string",
+      "length": 200,
+      "comment": "类型",
+      "nullable": true
+    },
+    {
+      "label": "图标",
       "name": "icon",
       "type": "string",
       "length": 200,
@@ -33,89 +53,69 @@
       "nullable": true
     },
     {
-      "name": "blocks",
-      "type": "boolean",
-      "comment": "block布局",
-      "default": false,
-      "index": true
+      "label": "权限",
+      "name": "permission",
+      "type": "string",
+      "length": 200,
+      "comment": "权限"
     },
     {
-      "name": "visible_menu",
-      "type": "boolean",
-      "comment": "显示",
-      "default": false,
-      "index": true
-    },
-    {
-      "name": "path",
+      "label": "路由",
+      "name": "routePath",
       "type": "string",
       "length": 200,
       "comment": "路由",
       "index": true
     },
     {
-      "name": "rank",
+      "label": "排序",
+      "name": "orderNo",
       "type": "integer",
-      "default": 9999,
-      "comment": "排列",
-      "index": true
+      "comment": "排序越大越靠前",
+      "nullable": false
+    },
+    {
+      "label": "是否外链",
+      "name": "isExt",
+      "type": "enum",
+      "comment": "是否外链",
+      "default": "0",
+      "option": ["1", "0"],
+      "nullable": true
+    },
+    {
+      "label": "是否显示",
+      "name": "show",
+      "type": "enum",
+      "comment": "是否显示",
+      "default": "0",
+      "option": ["1", "0"],
+      "nullable": true
+    },
+    {
+      "label": "是否缓存",
+      "name": "keepalive",
+      "type": "enum",
+      "comment": "是否缓存",
+      "default": "0",
+      "option": ["1", "0"],
+      "nullable": true
     },
     {
       "label": "状态",
       "name": "status",
       "type": "enum",
-      "default": "enabled",
-      "option": ["enabled", "disabled"],
-      "comment": "菜单状态 enabled 开启, disabled 关闭",
-      "index": true
+      "comment": "状态",
+      "default": "0",
+      "option": ["1", "0"],
+      "nullable": true
     }
   ],
-  "relations": {
-    "children": {
-      "type": "hasMany",
-      "model": "admin.menu",
-      "key": "parent",
-      "foreign": "id",
-      "query": {
-        "select": ["name", "icon", "blocks", "path", "rank", "status"]
-      }
-    }
-  },
-  "values": [
-    {
-      "name": "数据看板",
-      "path": "/kanban",
-      "icon": "icon-activity",
-      "rank": 1,
-      "status": "enabled",
-      "visible_menu": 0,
-      "blocks": 1
-    },
-    {
-      "name": "云服务库",
-      "path": "/table/service",
-      "icon": "icon-cloud",
-      "rank": 2,
-      "status": "enabled",
-      "visible_menu": 0,
-      "blocks": 0,
-      "children": [
-        {
-          "name": "云服务库",
-          "path": "/table/service",
-          "icon": "icon-list"
-        },
-        {
-          "name": "创建云服务库",
-          "path": "/form/service/0",
-          "icon": "icon-plus"
-        }
-      ]
-    }
-  ],
+  "relations": {},
+  "values": [],
   "indexes": [],
   "option": {
     "timestamps": true,
-    "soft_deletes": true
+    "soft_deletes": false
   }
 }

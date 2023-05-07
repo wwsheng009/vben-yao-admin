@@ -1,0 +1,57 @@
+{
+  "name": "用户角色",
+  "table": {
+    "name": "admin_role",
+    "comment": "用户角色"
+  },
+  "columns": [
+    { "label": "ID", "name": "id", "type": "ID" },
+
+    {
+      "label": "排序",
+      "name": "orderNo",
+      "type": "integer",
+      "comment": "排序越大越靠前",
+      "nullable": false
+    },
+    {
+      "label": "角色名",
+      "name": "roleName",
+      "type": "string",
+      "comment": "角色名称",
+      "nullable": false
+    },
+    {
+      "label": "角色值",
+      "name": "roleValue",
+      "type": "string",
+      "comment": "角色值",
+      "nullable": false
+    },
+    {
+      "label": "备注",
+      "name": "remark",
+      "type": "string",
+      "comment": "备注",
+      "length": 200,
+      "nullable": true
+    },
+    {
+      "label": "菜单",
+      "name": "menu",
+      "type": "json",
+      "comment": "菜单",
+      "nullable": true
+    },
+    {
+      "label": "状态",
+      "name": "status",
+      "type": "enum",
+      "comment": "状态",
+      "default": "0",
+      "option": ["1", "0"],
+      "nullable": true
+    }
+  ],
+  "option": { "timestamps": true, "soft_deletes": false }
+}
