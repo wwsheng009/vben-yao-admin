@@ -10,9 +10,7 @@
       "method": "GET",
       "guard": "-",
       "process": "xiang.helper.Captcha",
-      "in": [
-        ":query"
-      ],
+      "in": [":query"],
       "out": {
         "status": 200,
         "type": "application/json"
@@ -23,9 +21,7 @@
       "method": "POST",
       "guard": "-",
       "process": "flows.login.password",
-      "in": [
-        ":payload"
-      ],
+      "in": [":payload"],
       "out": {
         "status": 200,
         "type": "application/json"
@@ -35,9 +31,7 @@
       "path": "/inspect",
       "method": "GET",
       "process": "session.Get",
-      "in": [
-        "user"
-      ],
+      "in": ["user"],
       "out": {
         "status": 200,
         "type": "application/json"

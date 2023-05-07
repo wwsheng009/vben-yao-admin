@@ -1,0 +1,239 @@
+{
+  "action": {
+    "bind": {
+      "model": "admin.dept",
+      "option": {
+        "withs": {}
+      }
+    }
+  },
+  "layout": {
+    "actions": [
+      {
+        "action": [
+          {
+            "name": "Fullscreen",
+            "type": "Form.fullscreen",
+            "payload": {}
+          }
+        ],
+        "title": "切换全屏",
+        "icon": "icon-maximize-2",
+        "showWhenAdd": true,
+        "showWhenView": true
+      },
+      {
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "StudioModel",
+            "type": "Studio.model.cmd",
+            "payload": {
+              "method": "CreateOne",
+              "args": [
+                "admin.dept"
+              ]
+            }
+          },
+          {
+            "name": "Confirm",
+            "type": "Common.confirm",
+            "payload": {
+              "content": "处理完成",
+              "title": "提示"
+            }
+          }
+        ],
+        "title": "重新生成代码",
+        "icon": "icon-layers",
+        "showWhenAdd": true
+      },
+      {
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "CloseModal",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "返回",
+        "icon": "icon-arrow-left"
+      },
+      {
+        "showWhenAdd": true,
+        "action": [
+          {
+            "type": "Form.submit",
+            "payload": {},
+            "name": "Submit"
+          },
+          {
+            "name": "Back",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "保存",
+        "icon": "icon-check",
+        "style": "primary"
+      },
+      {
+        "icon": "icon-trash-2",
+        "style": "danger",
+        "title": "Delete",
+        "action": [
+          {
+            "name": "Confirm",
+            "type": "Common.confirm",
+            "payload": {
+              "title": "提示",
+              "content": "确认删除，删除后数据无法恢复？"
+            }
+          },
+          {
+            "type": "Form.delete",
+            "name": "Delete",
+            "payload": {
+              "model": "admin.dept"
+            }
+          },
+          {
+            "type": "Common.closeModal",
+            "payload": {},
+            "name": "Back"
+          }
+        ]
+      }
+    ],
+    "form": {
+      "sections": [
+        {
+          "columns": [
+            {
+              "name": "部门名称",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "上级部门id"
+            },
+            {
+              "name": "排序",
+              "width": 8
+            },
+            {
+              "name": "备注",
+              "width": 8
+            },
+            {
+              "name": "状态",
+              "width": 8
+            }
+          ]
+        }
+      ],
+      "props": {}
+    },
+    "primary": "id"
+  },
+  "fields": {
+    "form": {
+      "上级部门id": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "上级部门id,department表主键id",
+              "rules": [
+                {
+                  "required": true,
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "type": "InputNumber"
+        },
+        "bind": "parentDept"
+      },
+      "排序": {
+        "edit": {
+          "type": "InputNumber",
+          "props": {
+            "itemProps": {
+              "tooltip": "排序越大越靠前",
+              "rules": [
+                {
+                  "type": "integer",
+                  "required": true
+                }
+              ]
+            }
+          }
+        },
+        "bind": "orderNo"
+      },
+      "备注": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "备注"
+            }
+          }
+        },
+        "bind": "remark"
+      },
+      "状态": {
+        "bind": "status",
+        "edit": {
+          "type": "Select",
+          "props": {
+            "placeholder": "请选择状态",
+            "options": [
+              {
+                "label": "::1",
+                "value": "1"
+              },
+              {
+                "label": "::0",
+                "value": "0"
+              }
+            ],
+            "itemProps": {
+              "initialValue": "0",
+              "tooltip": "备注",
+              "rules": [
+                {
+                  "type": "enum",
+                  "enum": [
+                    "1",
+                    "0"
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      },
+      "部门名称": {
+        "bind": "deptName",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "required": true
+                }
+              ],
+              "tooltip": "部门名称"
+            }
+          },
+          "type": "Input"
+        }
+      }
+    }
+  },
+  "name": "部门"
+}

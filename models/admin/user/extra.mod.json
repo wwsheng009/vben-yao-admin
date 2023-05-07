@@ -1,0 +1,116 @@
+{
+  "name": "用户",
+  "table": {
+    "name": "admin_user_extra",
+    "comment": "用户表",
+    "engine": "InnoDB"
+  },
+  "columns": [
+    { "label": "ID", "name": "id", "type": "ID" },
+    { "label": "user id", "name": "user_id", "type": "integer" },
+    {
+      "label": "英文名",
+      "name": "en_name",
+      "type": "string",
+      "length": 255,
+      "comment": "英文名",
+      "nullable": true
+    },
+    {
+      "label": "工号",
+      "name": "job_number",
+      "type": "string",
+      "length": 255,
+      "comment": "工号",
+      "nullable": true
+    },
+    {
+      "label": "工作职位",
+      "name": "position",
+      "type": "string",
+      "length": 255,
+      "comment": "职位",
+      "nullable": true
+    },
+    {
+      "label": "工作地点",
+      "name": "work_place",
+      "type": "string",
+      "length": 255,
+      "comment": "工作地点",
+      "nullable": true
+    },
+    {
+      "label": "身份证号码",
+      "name": "idcard",
+      "type": "string",
+      "length": 256,
+      "comment": "身份证号码",
+      "crypt": "AES",
+      "nullable": true,
+      "validations": [
+        {
+          "method": "typeof",
+          "args": ["string"],
+          "message": "{{input}}类型错误, {{label}}应该为字符串"
+        },
+        {
+          "method": "pattern",
+          "args": ["^(\\d{18})|(\\d{14}X)$"],
+          "message": "{{label}}格式错误"
+        }
+      ]
+    },
+    {
+      "label": "API Key",
+      "name": "key",
+      "type": "string",
+      "length": 256,
+      "comment": "API Key",
+      "nullable": true,
+      "validations": [
+        {
+          "method": "typeof",
+          "args": ["string"],
+          "message": "{{input}}类型错误, {{label}}应该为数字"
+        },
+        {
+          "method": "pattern",
+          "args": ["^[0-9]{10}$"],
+          "message": " {{label}}应该由10位数字构成"
+        }
+      ]
+    },
+    {
+      "label": "API 密钥",
+      "name": "secret",
+      "type": "string",
+      "length": 256,
+      "nullable": true,
+      "crypt": "AES",
+      "comment": "API 密钥",
+      "validations": [
+        {
+          "method": "typeof",
+          "args": ["string"],
+          "message": "{{input}}类型错误, {{label}}应该为字符串"
+        },
+        {
+          "method": "pattern",
+          "args": ["^[0-9A-Za-z@#$&*]{32}$"],
+          "message": "{{label}}应该由32位，大小写字母、数字和符号构成"
+        }
+      ]
+    },
+    {
+      "label": "扩展信息",
+      "name": "extra",
+      "type": "json",
+      "comment": "扩展信息",
+      "nullable": true
+    }
+  ],
+  "relations": {},
+  "values": [],
+  "option": { "timestamps": true, "soft_deletes": true }
+}

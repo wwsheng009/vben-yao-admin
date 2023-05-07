@@ -1,0 +1,275 @@
+{
+  "name": "部门",
+  "action": {
+    "bind": {
+      "model": "admin.dept",
+      "option": {
+        "option": {
+          "form": "admin.dept"
+        },
+        "withs": {}
+      }
+    }
+  },
+  "layout": {
+    "table": {
+      "columns": [
+        {
+          "width": 160,
+          "name": "ID"
+        },
+        {
+          "name": "部门名称",
+          "width": 160
+        },
+        {
+          "name": "上级部门id",
+          "width": 250
+        },
+        {
+          "name": "排序",
+          "width": 160
+        },
+        {
+          "name": "备注",
+          "width": 160
+        },
+        {
+          "width": 160,
+          "name": "状态"
+        }
+      ],
+      "operation": {
+        "fold": false,
+        "actions": [
+          {
+            "title": "查看",
+            "icon": "icon-eye",
+            "action": [
+              {
+                "name": "OpenModal",
+                "type": "Common.openModal",
+                "payload": {
+                  "Form": {
+                    "model": "admin.dept_view",
+                    "type": "view"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "title": "编辑",
+            "icon": "icon-edit-2",
+            "action": [
+              {
+                "name": "OpenModal",
+                "type": "Common.openModal",
+                "payload": {
+                  "Form": {
+                    "model": "admin.dept",
+                    "type": "edit"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "action": [
+              {
+                "payload": {
+                  "title": "确认删除",
+                  "content": "删除后不可撤销！"
+                },
+                "name": "Confirm",
+                "type": "Common.confirm"
+              },
+              {
+                "payload": {
+                  "model": "admin.dept"
+                },
+                "name": "Delete",
+                "type": "Table.delete"
+              }
+            ],
+            "title": "删除",
+            "icon": "icon-trash-2"
+          }
+        ]
+      }
+    },
+    "primary": "id",
+    "header": {
+      "preset": {},
+      "actions": []
+    },
+    "filter": {
+      "columns": [],
+      "actions": [
+        {
+          "icon": "icon-plus",
+          "width": 3,
+          "action": [
+            {
+              "name": "OpenModal",
+              "type": "Common.openModal",
+              "payload": {
+                "Form": {
+                  "type": "edit",
+                  "model": "admin.dept"
+                }
+              }
+            }
+          ],
+          "title": "添加"
+        }
+      ]
+    }
+  },
+  "fields": {
+    "filter": {},
+    "table": {
+      "部门名称": {
+        "edit": {
+          "type": "Input",
+          "bind": "deptName",
+          "props": {
+            "itemProps": {
+              "tooltip": "部门名称",
+              "rules": [
+                {
+                  "required": true
+                }
+              ]
+            }
+          }
+        },
+        "bind": "deptName",
+        "view": {
+          "type": "Text",
+          "props": {}
+        }
+      },
+      "上级部门id": {
+        "bind": "parentDept",
+        "view": {
+          "props": {},
+          "type": "Text"
+        },
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "integer",
+                  "required": true
+                }
+              ],
+              "tooltip": "上级部门id,department表主键id"
+            }
+          },
+          "type": "InputNumber",
+          "bind": "parentDept"
+        }
+      },
+      "排序": {
+        "edit": {
+          "type": "InputNumber",
+          "bind": "orderNo",
+          "props": {
+            "itemProps": {
+              "tooltip": "排序越大越靠前",
+              "rules": [
+                {
+                  "required": true,
+                  "type": "integer"
+                }
+              ]
+            }
+          }
+        },
+        "bind": "orderNo",
+        "view": {
+          "props": {},
+          "type": "Text"
+        }
+      },
+      "备注": {
+        "view": {
+          "type": "Text",
+          "props": {}
+        },
+        "edit": {
+          "bind": "remark",
+          "props": {
+            "itemProps": {
+              "tooltip": "备注"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "remark"
+      },
+      "状态": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "enum": [
+                    "1",
+                    "0"
+                  ],
+                  "type": "enum"
+                }
+              ],
+              "initialValue": "0",
+              "tooltip": "备注"
+            },
+            "placeholder": "请选择状态",
+            "options": [
+              {
+                "value": "1",
+                "label": "::1"
+              },
+              {
+                "label": "::0",
+                "value": "0"
+              }
+            ]
+          },
+          "type": "Select"
+        },
+        "view": {
+          "props": {
+            "options": [
+              {
+                "value": "1",
+                "label": "::1"
+              },
+              {
+                "value": "0",
+                "label": "::0"
+              }
+            ],
+            "placeholder": "请选择状态"
+          },
+          "type": "Tag"
+        },
+        "bind": "status"
+      },
+      "ID": {
+        "bind": "id",
+        "view": {
+          "type": "Text",
+          "props": {}
+        },
+        "edit": {
+          "bind": "id",
+          "props": {},
+          "type": "Input"
+        }
+      }
+    }
+  }
+}

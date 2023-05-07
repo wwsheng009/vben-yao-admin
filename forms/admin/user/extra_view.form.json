@@ -1,0 +1,313 @@
+{
+  "fields": {
+    "form": {
+      "工号": {
+        "bind": "job_number",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "工号"
+            }
+          },
+          "type": "Input"
+        }
+      },
+      "工作职位": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "职位"
+            }
+          }
+        },
+        "bind": "position"
+      },
+      "扩展信息": {
+        "view": {
+          "compute": "scripts.ddic.compute.json.View"
+        },
+        "bind": "extra",
+        "edit": {
+          "props": {
+            "language": "json",
+            "height": 200,
+            "itemProps": {
+              "tooltip": "扩展信息"
+            }
+          },
+          "type": "CodeEditor"
+        }
+      },
+      "API Key": {
+        "bind": "key",
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "API Key",
+              "rules": [
+                {
+                  "pattern": "^[0-9]{10}$",
+                  "message": " {{label}}应该由10位数字构成"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "身份证号码": {
+        "bind": "idcard",
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "pattern": "^(\\d{18})|(\\d{14}X)$",
+                  "message": "{{label}}格式错误"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "tooltip": "身份证号码"
+            }
+          }
+        }
+      },
+      "user id": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "required": true,
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "type": "InputNumber"
+        },
+        "bind": "user_id"
+      },
+      "英文名": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "英文名"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "en_name"
+      },
+      "API 密钥": {
+        "bind": "secret",
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "pattern": "^[0-9A-Za-z@#$&*]{32}$",
+                  "message": "{{label}}应该由32位，大小写字母、数字和符号构成"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "tooltip": "API 密钥"
+            }
+          }
+        }
+      },
+      "工作地点": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "工作地点"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "work_place"
+      }
+    }
+  },
+  "name": "用户",
+  "action": {
+    "bind": {
+      "model": "admin.user.extra",
+      "option": {
+        "withs": {}
+      }
+    }
+  },
+  "layout": {
+    "actions": [
+      {
+        "showWhenView": true,
+        "action": [
+          {
+            "payload": {},
+            "name": "Fullscreen",
+            "type": "Form.fullscreen"
+          }
+        ],
+        "title": "切换全屏",
+        "icon": "icon-maximize-2",
+        "showWhenAdd": true
+      },
+      {
+        "showWhenView": true,
+        "action": [
+          {
+            "payload": {
+              "args": [
+                "admin.user.extra"
+              ],
+              "method": "CreateOne"
+            },
+            "name": "StudioModel",
+            "type": "Studio.model.cmd"
+          },
+          {
+            "type": "Common.confirm",
+            "payload": {
+              "title": "提示",
+              "content": "处理完成"
+            },
+            "name": "Confirm"
+          }
+        ],
+        "title": "重新生成代码",
+        "icon": "icon-layers",
+        "showWhenAdd": true
+      },
+      {
+        "icon": "icon-arrow-left",
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "CloseModal",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "返回"
+      },
+      {
+        "showWhenAdd": true,
+        "action": [
+          {
+            "name": "Submit",
+            "type": "Form.submit",
+            "payload": {}
+          },
+          {
+            "type": "Common.closeModal",
+            "payload": {},
+            "name": "Back"
+          }
+        ],
+        "title": "保存",
+        "icon": "icon-check",
+        "style": "primary"
+      },
+      {
+        "action": [
+          {
+            "type": "Common.confirm",
+            "payload": {
+              "title": "提示",
+              "content": "确认删除，删除后数据无法恢复？"
+            },
+            "name": "Confirm"
+          },
+          {
+            "name": "Delete",
+            "payload": {
+              "model": "admin.user.extra"
+            },
+            "type": "Form.delete"
+          },
+          {
+            "type": "Common.closeModal",
+            "payload": {},
+            "name": "Back"
+          }
+        ],
+        "icon": "icon-trash-2",
+        "style": "danger",
+        "title": "Delete"
+      }
+    ],
+    "form": {
+      "props": {},
+      "sections": [
+        {
+          "columns": [
+            {
+              "name": "user id",
+              "width": 8
+            },
+            {
+              "name": "英文名",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "工号"
+            },
+            {
+              "name": "工作职位",
+              "width": 8
+            },
+            {
+              "name": "工作地点",
+              "width": 8
+            },
+            {
+              "name": "身份证号码",
+              "width": 8
+            },
+            {
+              "name": "API Key",
+              "width": 8
+            },
+            {
+              "name": "API 密钥",
+              "width": 8
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "width": 24,
+              "name": "列表",
+              "tabs": [
+                {
+                  "columns": [
+                    {
+                      "name": "扩展信息",
+                      "width": 24
+                    }
+                  ],
+                  "title": "扩展信息"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "primary": "id"
+  }
+}

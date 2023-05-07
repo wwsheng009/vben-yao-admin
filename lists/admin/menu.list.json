@@ -1,0 +1,200 @@
+{
+  "layout": {
+    "list": {
+      "columns": [
+        {
+          "name": "name",
+          "width": 6
+        },
+        {
+          "width": 24,
+          "name": "icon"
+        },
+        {
+          "name": "blocks",
+          "width": 6
+        },
+        {
+          "name": "visible_menu",
+          "width": 6
+        },
+        {
+          "width": 6,
+          "name": "path"
+        },
+        {
+          "width": 6,
+          "name": "rank"
+        },
+        {
+          "name": "状态",
+          "width": 6
+        }
+      ]
+    }
+  },
+  "fields": {
+    "list": {
+      "icon": {
+        "view": {
+          "type": "Image",
+          "compute": "scripts.file.upload.View",
+          "props": {}
+        },
+        "edit": {
+          "type": "Upload",
+          "compute": {
+            "args": [
+              "$C(row)",
+              "icon",
+              "admin_menu"
+            ],
+            "process": "scripts.file.upload.Edit"
+          },
+          "props": {
+            "filetype": "image",
+            "$api": {
+              "process": "fs.system.Upload"
+            },
+            "maxCount": 100,
+            "itemProps": {
+              "tooltip": "图标"
+            }
+          }
+        },
+        "bind": "icon"
+      },
+      "blocks": {
+        "edit": {
+          "type": "RadioGroup",
+          "props": {
+            "itemProps": {
+              "tooltip": "block布局",
+              "initialValue": false
+            },
+            "options": [
+              {
+                "value": true,
+                "label": "是"
+              },
+              {
+                "label": "否",
+                "value": false
+              }
+            ]
+          }
+        },
+        "bind": "blocks"
+      },
+      "visible_menu": {
+        "bind": "visible_menu",
+        "edit": {
+          "props": {
+            "options": [
+              {
+                "value": true,
+                "label": "是"
+              },
+              {
+                "value": false,
+                "label": "否"
+              }
+            ],
+            "itemProps": {
+              "initialValue": false,
+              "tooltip": "显示"
+            }
+          },
+          "type": "RadioGroup"
+        }
+      },
+      "path": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "路由",
+              "rules": [
+                {
+                  "required": true
+                }
+              ]
+            }
+          }
+        },
+        "bind": "path"
+      },
+      "rank": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ],
+              "initialValue": 9999,
+              "tooltip": "排列"
+            }
+          },
+          "type": "InputNumber"
+        },
+        "bind": "rank"
+      },
+      "状态": {
+        "bind": "status",
+        "edit": {
+          "type": "Select",
+          "props": {
+            "placeholder": "请选择状态",
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "enum",
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ]
+                }
+              ],
+              "initialValue": "enabled",
+              "tooltip": "菜单状态 enabled 开启, disabled 关闭"
+            },
+            "options": [
+              {
+                "value": "enabled",
+                "label": "::enabled"
+              },
+              {
+                "value": "disabled",
+                "label": "::disabled"
+              }
+            ]
+          }
+        }
+      },
+      "name": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "名称",
+              "rules": [
+                {
+                  "required": true
+                }
+              ]
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "name"
+      }
+    }
+  },
+  "name": "菜单",
+  "action": {
+    "bind": {
+      "table": "admin.menu"
+    }
+  }
+}

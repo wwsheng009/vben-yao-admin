@@ -1,0 +1,366 @@
+{
+  "name": "菜单",
+  "action": {
+    "bind": {
+      "model": "admin.menu",
+      "option": {
+        "withs": {
+          "children": {}
+        }
+      }
+    }
+  },
+  "layout": {
+    "form": {
+      "props": {},
+      "sections": [
+        {
+          "columns": [
+            {
+              "name": "parent",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "name"
+            },
+            {
+              "width": 8,
+              "name": "blocks"
+            },
+            {
+              "width": 8,
+              "name": "visible_menu"
+            },
+            {
+              "name": "path",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "rank"
+            },
+            {
+              "width": 8,
+              "name": "状态"
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "name": "列表",
+              "tabs": [
+                {
+                  "columns": [
+                    {
+                      "width": 24,
+                      "name": "icon"
+                    }
+                  ],
+                  "title": "icon"
+                },
+                {
+                  "title": "列表children",
+                  "columns": [
+                    {
+                      "name": "列表children",
+                      "width": 24
+                    }
+                  ]
+                }
+              ],
+              "width": 24
+            }
+          ]
+        }
+      ]
+    },
+    "primary": "id",
+    "actions": [
+      {
+        "title": "切换全屏",
+        "icon": "icon-maximize-2",
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "payload": {},
+            "name": "Fullscreen",
+            "type": "Form.fullscreen"
+          }
+        ]
+      },
+      {
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "StudioModel",
+            "type": "Studio.model.cmd",
+            "payload": {
+              "args": [
+                "admin.menu"
+              ],
+              "method": "CreateOne"
+            }
+          },
+          {
+            "type": "Common.confirm",
+            "payload": {
+              "content": "处理完成",
+              "title": "提示"
+            },
+            "name": "Confirm"
+          }
+        ],
+        "title": "重新生成代码",
+        "icon": "icon-layers"
+      },
+      {
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "CloseModal",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "返回",
+        "icon": "icon-arrow-left",
+        "showWhenAdd": true
+      },
+      {
+        "title": "保存",
+        "icon": "icon-check",
+        "style": "primary",
+        "showWhenAdd": true,
+        "action": [
+          {
+            "name": "Submit",
+            "type": "Form.submit",
+            "payload": {}
+          },
+          {
+            "name": "Back",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ]
+      },
+      {
+        "icon": "icon-trash-2",
+        "style": "danger",
+        "title": "Delete",
+        "action": [
+          {
+            "type": "Common.confirm",
+            "payload": {
+              "title": "提示",
+              "content": "确认删除，删除后数据无法恢复？"
+            },
+            "name": "Confirm"
+          },
+          {
+            "name": "Delete",
+            "payload": {
+              "model": "admin.menu"
+            },
+            "type": "Form.delete"
+          },
+          {
+            "name": "Back",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ]
+      }
+    ]
+  },
+  "fields": {
+    "form": {
+      "parent": {
+        "bind": "parent",
+        "edit": {
+          "type": "InputNumber",
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ],
+              "tooltip": "父节点"
+            }
+          }
+        }
+      },
+      "icon": {
+        "bind": "icon",
+        "view": {
+          "type": "Image",
+          "compute": "scripts.file.upload.View",
+          "props": {}
+        },
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "图标"
+            },
+            "$api": {
+              "process": "fs.system.Upload"
+            },
+            "maxCount": 100,
+            "filetype": "image"
+          },
+          "type": "Upload",
+          "compute": {
+            "process": "scripts.file.upload.Edit",
+            "args": [
+              "$C(row)",
+              "icon",
+              "admin_menu"
+            ]
+          }
+        }
+      },
+      "visible_menu": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "显示",
+              "initialValue": false
+            },
+            "options": [
+              {
+                "value": true,
+                "label": "是"
+              },
+              {
+                "label": "否",
+                "value": false
+              }
+            ]
+          },
+          "type": "RadioGroup"
+        },
+        "bind": "visible_menu"
+      },
+      "rank": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ],
+              "initialValue": 9999,
+              "tooltip": "排列"
+            }
+          },
+          "type": "InputNumber"
+        },
+        "bind": "rank"
+      },
+      "name": {
+        "bind": "name",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "名称",
+              "rules": [
+                {
+                  "required": true
+                }
+              ]
+            }
+          },
+          "type": "Input"
+        }
+      },
+      "blocks": {
+        "bind": "blocks",
+        "edit": {
+          "props": {
+            "options": [
+              {
+                "value": true,
+                "label": "是"
+              },
+              {
+                "value": false,
+                "label": "否"
+              }
+            ],
+            "itemProps": {
+              "initialValue": false,
+              "tooltip": "block布局"
+            }
+          },
+          "type": "RadioGroup"
+        }
+      },
+      "path": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "路由",
+              "rules": [
+                {
+                  "required": true
+                }
+              ]
+            }
+          }
+        },
+        "bind": "path"
+      },
+      "状态": {
+        "edit": {
+          "props": {
+            "placeholder": "请选择状态",
+            "options": [
+              {
+                "label": "::enabled",
+                "value": "enabled"
+              },
+              {
+                "value": "disabled",
+                "label": "::disabled"
+              }
+            ],
+            "itemProps": {
+              "tooltip": "菜单状态 enabled 开启, disabled 关闭",
+              "rules": [
+                {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "enum"
+                }
+              ],
+              "initialValue": "enabled"
+            }
+          },
+          "type": "Select"
+        },
+        "bind": "status"
+      },
+      "列表children": {
+        "edit": {
+          "type": "Table",
+          "props": {
+            "query": {
+              "where.parent.eq": "{{id}}"
+            },
+            "model": "admin.menu"
+          }
+        },
+        "bind": "id"
+      }
+    }
+  }
+}

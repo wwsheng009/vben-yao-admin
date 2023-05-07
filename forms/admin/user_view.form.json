@@ -1,0 +1,465 @@
+{
+  "action": {
+    "bind": {
+      "model": "admin.user",
+      "option": {
+        "withs": {}
+      }
+    }
+  },
+  "layout": {
+    "primary": "id",
+    "actions": [
+      {
+        "title": "切换全屏",
+        "icon": "icon-maximize-2",
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "type": "Form.fullscreen",
+            "payload": {},
+            "name": "Fullscreen"
+          }
+        ]
+      },
+      {
+        "action": [
+          {
+            "type": "Studio.model.cmd",
+            "payload": {
+              "args": [
+                "admin.user"
+              ],
+              "method": "CreateOne"
+            },
+            "name": "StudioModel"
+          },
+          {
+            "name": "Confirm",
+            "type": "Common.confirm",
+            "payload": {
+              "title": "提示",
+              "content": "处理完成"
+            }
+          }
+        ],
+        "title": "重新生成代码",
+        "icon": "icon-layers",
+        "showWhenAdd": true,
+        "showWhenView": true
+      },
+      {
+        "icon": "icon-arrow-left",
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "CloseModal",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "返回"
+      },
+      {
+        "showWhenAdd": true,
+        "action": [
+          {
+            "name": "Submit",
+            "type": "Form.submit",
+            "payload": {}
+          },
+          {
+            "payload": {},
+            "name": "Back",
+            "type": "Common.closeModal"
+          }
+        ],
+        "title": "保存",
+        "icon": "icon-check",
+        "style": "primary"
+      },
+      {
+        "icon": "icon-trash-2",
+        "style": "danger",
+        "title": "Delete",
+        "action": [
+          {
+            "payload": {
+              "content": "确认删除，删除后数据无法恢复？",
+              "title": "提示"
+            },
+            "name": "Confirm",
+            "type": "Common.confirm"
+          },
+          {
+            "payload": {
+              "model": "admin.user"
+            },
+            "type": "Form.delete",
+            "name": "Delete"
+          },
+          {
+            "name": "Back",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ]
+      }
+    ],
+    "form": {
+      "props": {},
+      "sections": [
+        {
+          "columns": [
+            {
+              "name": "类型",
+              "width": 8
+            },
+            {
+              "name": "姓名",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "英文名"
+            },
+            {
+              "name": "工号",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "邮箱"
+            },
+            {
+              "width": 8,
+              "name": "手机号"
+            },
+            {
+              "width": 8,
+              "name": "登录密码"
+            },
+            {
+              "name": "昵称",
+              "width": 8
+            },
+            {
+              "name": "性别",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "所属部门"
+            },
+            {
+              "name": "状态",
+              "width": 8
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "tabs": [
+                {
+                  "columns": [
+                    {
+                      "width": 24,
+                      "name": "头像"
+                    }
+                  ],
+                  "title": "头像"
+                }
+              ],
+              "width": 24,
+              "name": "列表"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "fields": {
+    "form": {
+      "手机号": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "手机号"
+            }
+          }
+        },
+        "bind": "mobile"
+      },
+      "类型": {
+        "bind": "type",
+        "edit": {
+          "props": {
+            "placeholder": "请选择类型",
+            "itemProps": {
+              "initialValue": "user",
+              "tooltip": "账号类型 admin 管理员, staff 员工, user 用户, robot 机器人",
+              "rules": [
+                {
+                  "enum": [
+                    "admin",
+                    "staff",
+                    "user",
+                    "robot"
+                  ],
+                  "type": "enum"
+                }
+              ]
+            },
+            "options": [
+              {
+                "value": "admin",
+                "label": "::admin"
+              },
+              {
+                "label": "::staff",
+                "value": "staff"
+              },
+              {
+                "label": "::user",
+                "value": "user"
+              },
+              {
+                "value": "robot",
+                "label": "::robot"
+              }
+            ]
+          },
+          "type": "Select"
+        }
+      },
+      "姓名": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "姓名",
+              "rules": [
+                {
+                  "min": 2,
+                  "max": 40,
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "name"
+      },
+      "所属部门": {
+        "bind": "department_id",
+        "edit": {
+          "type": "InputNumber",
+          "props": {
+            "itemProps": {
+              "tooltip": "所属部门",
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "登录密码": {
+        "bind": "password",
+        "edit": {
+          "type": "Password",
+          "props": {
+            "itemProps": {
+              "tooltip": "登录密码",
+              "rules": [
+                {
+                  "pattern": "[0-9]+",
+                  "message": "{{label}}应该至少包含一个数字"
+                },
+                {
+                  "message": "{{label}}应该至少包含一个大写字母",
+                  "pattern": "[A-Z]+"
+                },
+                {
+                  "message": "{{label}}应该至少包含一个小写字母",
+                  "pattern": "[a-z]+"
+                },
+                {
+                  "message": "{{label}}应该至少包含一个符号",
+                  "pattern": "[@#$&*\\+]+"
+                },
+                {
+                  "max": 18,
+                  "type": "string",
+                  "min": 6
+                }
+              ]
+            }
+          }
+        },
+        "view": {
+          "compute": "Hide"
+        }
+      },
+      "英文名": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "英文名"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "en_name"
+      },
+      "昵称": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "昵称",
+              "rules": [
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "nickname"
+      },
+      "头像": {
+        "bind": "avatar",
+        "view": {
+          "compute": "scripts.file.upload.View",
+          "props": {},
+          "type": "Image"
+        },
+        "edit": {
+          "type": "Upload",
+          "compute": {
+            "process": "scripts.file.upload.Edit",
+            "args": [
+              "$C(row)",
+              "avatar",
+              "admin_user"
+            ]
+          },
+          "props": {
+            "filetype": "image",
+            "itemProps": {
+              "tooltip": "头像"
+            },
+            "$api": {
+              "process": "fs.system.Upload"
+            },
+            "maxCount": 100
+          }
+        }
+      },
+      "性别": {
+        "bind": "gender",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "enum",
+                  "enum": [
+                    "男",
+                    "女",
+                    "未知"
+                  ]
+                }
+              ],
+              "initialValue": "未知",
+              "tooltip": "性别"
+            },
+            "placeholder": "请选择性别",
+            "options": [
+              {
+                "value": "男",
+                "label": "::男"
+              },
+              {
+                "value": "女",
+                "label": "::女"
+              },
+              {
+                "label": "::未知",
+                "value": "未知"
+              }
+            ]
+          },
+          "type": "Select"
+        }
+      },
+      "邮箱": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "string"
+                }
+              ],
+              "tooltip": "邮箱"
+            }
+          }
+        },
+        "bind": "email"
+      },
+      "工号": {
+        "bind": "job_number",
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "工号"
+            }
+          }
+        }
+      },
+      "状态": {
+        "edit": {
+          "props": {
+            "options": [
+              {
+                "label": "::enabled",
+                "value": "enabled"
+              },
+              {
+                "label": "::disabled",
+                "value": "disabled"
+              }
+            ],
+            "placeholder": "请选择状态",
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "enum",
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ]
+                }
+              ],
+              "initialValue": "enabled",
+              "tooltip": "用户状态 enabled 有效, disabled 无效"
+            }
+          },
+          "type": "Select"
+        },
+        "bind": "status"
+      }
+    }
+  },
+  "name": "用户"
+}

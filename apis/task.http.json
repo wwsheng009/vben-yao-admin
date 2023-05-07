@@ -1,31 +1,29 @@
 {
-    "name": "任务",
-    "version": "1.0.0",
-    "description": "任务",
-    "guard": "-",
-    "group": "test",
-    "paths": [
-        {
-            "path": "/task/add",
-            "method": "GET",
-            "process": "scripts.task_test.task_add",
-            "in": [],
-            "out": {
-                "status": 200,
-                "type": "application/json"
-            }
-        },
-        {
-            "path": "/task/get/:id",
-            "method": "GET",
-            "process": "tasks.test.get",
-            "in": [
-                "$param.id"
-            ],
-            "out": {
-                "status": 200,
-                "type": "application/json"
-            }
-        }
-    ]
+  "name": "任务",
+  "version": "1.0.0",
+  "description": "任务",
+  "guard": "-",
+  "group": "test",
+  "paths": [
+    {
+      "path": "/task/add",
+      "method": "GET",
+      "process": "scripts.task_test.task_add",
+      "in": [],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    },
+    {
+      "path": "/task/get/:id",
+      "method": "GET",
+      "process": "tasks.test.get",
+      "in": ["$param.id"],
+      "out": {
+        "status": 200,
+        "type": "application/json"
+      }
+    }
+  ]
 }

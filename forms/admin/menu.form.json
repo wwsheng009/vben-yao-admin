@@ -1,0 +1,369 @@
+{
+  "layout": {
+    "actions": [
+      {
+        "title": "切换全屏",
+        "icon": "icon-maximize-2",
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "payload": {},
+            "name": "Fullscreen",
+            "type": "Form.fullscreen"
+          }
+        ]
+      },
+      {
+        "action": [
+          {
+            "type": "Studio.model.cmd",
+            "payload": {
+              "method": "CreateOne",
+              "args": [
+                "admin.menu"
+              ]
+            },
+            "name": "StudioModel"
+          },
+          {
+            "payload": {
+              "title": "提示",
+              "content": "处理完成"
+            },
+            "name": "Confirm",
+            "type": "Common.confirm"
+          }
+        ],
+        "title": "重新生成代码",
+        "icon": "icon-layers",
+        "showWhenAdd": true,
+        "showWhenView": true
+      },
+      {
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "CloseModal",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "返回",
+        "icon": "icon-arrow-left"
+      },
+      {
+        "action": [
+          {
+            "type": "Form.submit",
+            "payload": {},
+            "name": "Submit"
+          },
+          {
+            "name": "Back",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "保存",
+        "icon": "icon-check",
+        "style": "primary",
+        "showWhenAdd": true
+      },
+      {
+        "icon": "icon-trash-2",
+        "style": "danger",
+        "title": "Delete",
+        "action": [
+          {
+            "name": "Confirm",
+            "type": "Common.confirm",
+            "payload": {
+              "content": "确认删除，删除后数据无法恢复？",
+              "title": "提示"
+            }
+          },
+          {
+            "type": "Form.delete",
+            "name": "Delete",
+            "payload": {
+              "model": "admin.menu"
+            }
+          },
+          {
+            "payload": {},
+            "name": "Back",
+            "type": "Common.closeModal"
+          }
+        ]
+      }
+    ],
+    "form": {
+      "props": {},
+      "sections": [
+        {
+          "columns": [
+            {
+              "name": "parent",
+              "width": 8
+            },
+            {
+              "name": "name",
+              "width": 8
+            },
+            {
+              "name": "blocks",
+              "width": 8
+            },
+            {
+              "name": "visible_menu",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "path"
+            },
+            {
+              "width": 8,
+              "name": "rank"
+            },
+            {
+              "width": 8,
+              "name": "状态"
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "width": 24,
+              "name": "列表",
+              "tabs": [
+                {
+                  "title": "icon",
+                  "columns": [
+                    {
+                      "width": 24,
+                      "name": "icon"
+                    }
+                  ]
+                },
+                {
+                  "title": "列表children",
+                  "columns": [
+                    {
+                      "name": "列表children",
+                      "width": 24
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "primary": "id"
+  },
+  "fields": {
+    "form": {
+      "rank": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ],
+              "initialValue": 9999,
+              "tooltip": "排列"
+            }
+          },
+          "type": "InputNumber"
+        },
+        "bind": "rank"
+      },
+      "列表children": {
+        "edit": {
+          "type": "List",
+          "props": {
+            "showLabel": true,
+            "name": "admin.menu"
+          }
+        },
+        "bind": "children"
+      },
+      "状态": {
+        "bind": "status",
+        "edit": {
+          "props": {
+            "options": [
+              {
+                "label": "::enabled",
+                "value": "enabled"
+              },
+              {
+                "value": "disabled",
+                "label": "::disabled"
+              }
+            ],
+            "placeholder": "请选择状态",
+            "itemProps": {
+              "tooltip": "菜单状态 enabled 开启, disabled 关闭",
+              "rules": [
+                {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "enum"
+                }
+              ],
+              "initialValue": "enabled"
+            }
+          },
+          "type": "Select"
+        }
+      },
+      "visible_menu": {
+        "bind": "visible_menu",
+        "edit": {
+          "type": "RadioGroup",
+          "props": {
+            "itemProps": {
+              "tooltip": "显示",
+              "initialValue": false
+            },
+            "options": [
+              {
+                "label": "是",
+                "value": true
+              },
+              {
+                "value": false,
+                "label": "否"
+              }
+            ]
+          }
+        }
+      },
+      "parent": {
+        "bind": "parent",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "父节点",
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "type": "InputNumber"
+        }
+      },
+      "blocks": {
+        "bind": "blocks",
+        "edit": {
+          "props": {
+            "options": [
+              {
+                "value": true,
+                "label": "是"
+              },
+              {
+                "value": false,
+                "label": "否"
+              }
+            ],
+            "itemProps": {
+              "tooltip": "block布局",
+              "initialValue": false
+            }
+          },
+          "type": "RadioGroup"
+        }
+      },
+      "path": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "required": true
+                }
+              ],
+              "tooltip": "路由"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "path"
+      },
+      "name": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "名称",
+              "rules": [
+                {
+                  "required": true
+                }
+              ]
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "name"
+      },
+      "icon": {
+        "view": {
+          "type": "Image",
+          "compute": "scripts.file.upload.View",
+          "props": {}
+        },
+        "edit": {
+          "type": "Upload",
+          "compute": {
+            "process": "scripts.file.upload.Edit",
+            "args": [
+              "$C(row)",
+              "icon",
+              "admin_menu"
+            ]
+          },
+          "props": {
+            "filetype": "image",
+            "itemProps": {
+              "tooltip": "图标"
+            },
+            "$api": {
+              "process": "fs.system.Upload"
+            },
+            "maxCount": 100
+          }
+        },
+        "bind": "icon"
+      }
+    }
+  },
+  "name": "菜单",
+  "action": {
+    "bind": {
+      "option": {
+        "withs": {
+          "children": {}
+        }
+      },
+      "model": "admin.menu"
+    },
+    "save": {
+      "process": "scripts.admin.menu.Save"
+    },
+    "before:delete": "scripts.admin.menu.BeforeDelete",
+    "after:find": "scripts.admin.menu.AfterFind"
+  }
+}

@@ -1,0 +1,465 @@
+{
+  "layout": {
+    "primary": "id",
+    "actions": [
+      {
+        "icon": "icon-maximize-2",
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "payload": {},
+            "name": "Fullscreen",
+            "type": "Form.fullscreen"
+          }
+        ],
+        "title": "切换全屏"
+      },
+      {
+        "action": [
+          {
+            "payload": {
+              "method": "CreateOne",
+              "args": [
+                "admin.user"
+              ]
+            },
+            "name": "StudioModel",
+            "type": "Studio.model.cmd"
+          },
+          {
+            "type": "Common.confirm",
+            "payload": {
+              "content": "处理完成",
+              "title": "提示"
+            },
+            "name": "Confirm"
+          }
+        ],
+        "title": "重新生成代码",
+        "icon": "icon-layers",
+        "showWhenAdd": true,
+        "showWhenView": true
+      },
+      {
+        "icon": "icon-arrow-left",
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "CloseModal",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "返回"
+      },
+      {
+        "title": "保存",
+        "icon": "icon-check",
+        "style": "primary",
+        "showWhenAdd": true,
+        "action": [
+          {
+            "type": "Form.submit",
+            "payload": {},
+            "name": "Submit"
+          },
+          {
+            "type": "Common.closeModal",
+            "payload": {},
+            "name": "Back"
+          }
+        ]
+      },
+      {
+        "style": "danger",
+        "title": "Delete",
+        "action": [
+          {
+            "type": "Common.confirm",
+            "payload": {
+              "title": "提示",
+              "content": "确认删除，删除后数据无法恢复？"
+            },
+            "name": "Confirm"
+          },
+          {
+            "type": "Form.delete",
+            "name": "Delete",
+            "payload": {
+              "model": "admin.user"
+            }
+          },
+          {
+            "type": "Common.closeModal",
+            "payload": {},
+            "name": "Back"
+          }
+        ],
+        "icon": "icon-trash-2"
+      }
+    ],
+    "form": {
+      "props": {},
+      "sections": [
+        {
+          "columns": [
+            {
+              "width": 8,
+              "name": "类型"
+            },
+            {
+              "width": 8,
+              "name": "姓名"
+            },
+            {
+              "width": 8,
+              "name": "英文名"
+            },
+            {
+              "name": "工号",
+              "width": 8
+            },
+            {
+              "name": "邮箱",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "手机号"
+            },
+            {
+              "name": "登录密码",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "昵称"
+            },
+            {
+              "name": "性别",
+              "width": 8
+            },
+            {
+              "name": "所属部门",
+              "width": 8
+            },
+            {
+              "name": "状态",
+              "width": 8
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "name": "列表",
+              "tabs": [
+                {
+                  "title": "头像",
+                  "columns": [
+                    {
+                      "name": "头像",
+                      "width": 24
+                    }
+                  ]
+                }
+              ],
+              "width": 24
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "fields": {
+    "form": {
+      "所属部门": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "所属部门",
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "type": "InputNumber"
+        },
+        "bind": "department_id"
+      },
+      "工号": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "工号"
+            }
+          }
+        },
+        "bind": "job_number"
+      },
+      "登录密码": {
+        "view": {
+          "compute": "Hide"
+        },
+        "bind": "password",
+        "edit": {
+          "type": "Password",
+          "props": {
+            "itemProps": {
+              "tooltip": "登录密码",
+              "rules": [
+                {
+                  "pattern": "[0-9]+",
+                  "message": "{{label}}应该至少包含一个数字"
+                },
+                {
+                  "message": "{{label}}应该至少包含一个大写字母",
+                  "pattern": "[A-Z]+"
+                },
+                {
+                  "message": "{{label}}应该至少包含一个小写字母",
+                  "pattern": "[a-z]+"
+                },
+                {
+                  "pattern": "[@#$&*\\+]+",
+                  "message": "{{label}}应该至少包含一个符号"
+                },
+                {
+                  "type": "string",
+                  "min": 6,
+                  "max": 18
+                }
+              ]
+            }
+          }
+        }
+      },
+      "邮箱": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "string"
+                }
+              ],
+              "tooltip": "邮箱"
+            }
+          }
+        },
+        "bind": "email"
+      },
+      "类型": {
+        "edit": {
+          "props": {
+            "placeholder": "请选择类型",
+            "itemProps": {
+              "initialValue": "user",
+              "tooltip": "账号类型 admin 管理员, staff 员工, user 用户, robot 机器人",
+              "rules": [
+                {
+                  "enum": [
+                    "admin",
+                    "staff",
+                    "user",
+                    "robot"
+                  ],
+                  "type": "enum"
+                }
+              ]
+            },
+            "options": [
+              {
+                "label": "::admin",
+                "value": "admin"
+              },
+              {
+                "value": "staff",
+                "label": "::staff"
+              },
+              {
+                "value": "user",
+                "label": "::user"
+              },
+              {
+                "label": "::robot",
+                "value": "robot"
+              }
+            ]
+          },
+          "type": "Select"
+        },
+        "bind": "type"
+      },
+      "昵称": {
+        "bind": "nickname",
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "type": "string"
+                }
+              ],
+              "tooltip": "昵称"
+            }
+          }
+        }
+      },
+      "手机号": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "手机号"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "mobile"
+      },
+      "英文名": {
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "英文名"
+            }
+          }
+        },
+        "bind": "en_name"
+      },
+      "头像": {
+        "view": {
+          "compute": "scripts.file.upload.View",
+          "props": {},
+          "type": "Image"
+        },
+        "edit": {
+          "compute": {
+            "args": [
+              "$C(row)",
+              "avatar",
+              "admin_user"
+            ],
+            "process": "scripts.file.upload.Edit"
+          },
+          "props": {
+            "filetype": "image",
+            "$api": {
+              "process": "fs.system.Upload"
+            },
+            "maxCount": 100,
+            "itemProps": {
+              "tooltip": "头像"
+            }
+          },
+          "type": "Upload"
+        },
+        "bind": "avatar"
+      },
+      "性别": {
+        "edit": {
+          "props": {
+            "options": [
+              {
+                "label": "::男",
+                "value": "男"
+              },
+              {
+                "value": "女",
+                "label": "::女"
+              },
+              {
+                "label": "::未知",
+                "value": "未知"
+              }
+            ],
+            "placeholder": "请选择性别",
+            "itemProps": {
+              "rules": [
+                {
+                  "enum": [
+                    "男",
+                    "女",
+                    "未知"
+                  ],
+                  "type": "enum"
+                }
+              ],
+              "initialValue": "未知",
+              "tooltip": "性别"
+            }
+          },
+          "type": "Select"
+        },
+        "bind": "gender"
+      },
+      "状态": {
+        "bind": "status",
+        "edit": {
+          "type": "Select",
+          "props": {
+            "options": [
+              {
+                "value": "enabled",
+                "label": "::enabled"
+              },
+              {
+                "value": "disabled",
+                "label": "::disabled"
+              }
+            ],
+            "placeholder": "请选择状态",
+            "itemProps": {
+              "rules": [
+                {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "enum"
+                }
+              ],
+              "initialValue": "enabled",
+              "tooltip": "用户状态 enabled 有效, disabled 无效"
+            }
+          }
+        }
+      },
+      "姓名": {
+        "bind": "name",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "min": 2,
+                  "max": 40,
+                  "type": "string"
+                }
+              ],
+              "tooltip": "姓名"
+            }
+          },
+          "type": "Input"
+        }
+      }
+    }
+  },
+  "name": "用户",
+  "action": {
+    "bind": {
+      "model": "admin.user",
+      "option": {
+        "withs": {}
+      }
+    }
+  }
+}

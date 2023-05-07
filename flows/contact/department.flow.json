@@ -5,7 +5,7 @@
   "nodes": [
     {
       "name": "部门列表",
-      "engine": "xiang",
+      "engine": "default",
       "query": {
         "debug": true,
         "select": [
@@ -21,7 +21,7 @@
             "=": null
           }
         ],
-        "from": "$contact.department",
+        "from": "$admin.dept",
         "joins": [
           {
             "left": true,
@@ -36,9 +36,7 @@
     {
       "name": "打印",
       "process": "xiang.helper.Print",
-      "args": [
-        "{{$res.部门列表}}"
-      ]
+      "args": ["{{$res.部门列表}}"]
     },
     {
       "name": "部门",

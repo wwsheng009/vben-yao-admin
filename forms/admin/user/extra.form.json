@@ -1,0 +1,313 @@
+{
+  "layout": {
+    "actions": [
+      {
+        "title": "切换全屏",
+        "icon": "icon-maximize-2",
+        "showWhenAdd": true,
+        "showWhenView": true,
+        "action": [
+          {
+            "name": "Fullscreen",
+            "type": "Form.fullscreen",
+            "payload": {}
+          }
+        ]
+      },
+      {
+        "action": [
+          {
+            "payload": {
+              "method": "CreateOne",
+              "args": [
+                "admin.user.extra"
+              ]
+            },
+            "name": "StudioModel",
+            "type": "Studio.model.cmd"
+          },
+          {
+            "name": "Confirm",
+            "type": "Common.confirm",
+            "payload": {
+              "title": "提示",
+              "content": "处理完成"
+            }
+          }
+        ],
+        "title": "重新生成代码",
+        "icon": "icon-layers",
+        "showWhenAdd": true,
+        "showWhenView": true
+      },
+      {
+        "showWhenView": true,
+        "action": [
+          {
+            "payload": {},
+            "name": "CloseModal",
+            "type": "Common.closeModal"
+          }
+        ],
+        "title": "返回",
+        "icon": "icon-arrow-left",
+        "showWhenAdd": true
+      },
+      {
+        "showWhenAdd": true,
+        "action": [
+          {
+            "type": "Form.submit",
+            "payload": {},
+            "name": "Submit"
+          },
+          {
+            "name": "Back",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "title": "保存",
+        "icon": "icon-check",
+        "style": "primary"
+      },
+      {
+        "action": [
+          {
+            "type": "Common.confirm",
+            "payload": {
+              "title": "提示",
+              "content": "确认删除，删除后数据无法恢复？"
+            },
+            "name": "Confirm"
+          },
+          {
+            "name": "Delete",
+            "payload": {
+              "model": "admin.user.extra"
+            },
+            "type": "Form.delete"
+          },
+          {
+            "name": "Back",
+            "type": "Common.closeModal",
+            "payload": {}
+          }
+        ],
+        "icon": "icon-trash-2",
+        "style": "danger",
+        "title": "Delete"
+      }
+    ],
+    "form": {
+      "props": {},
+      "sections": [
+        {
+          "columns": [
+            {
+              "width": 8,
+              "name": "user id"
+            },
+            {
+              "name": "英文名",
+              "width": 8
+            },
+            {
+              "name": "工号",
+              "width": 8
+            },
+            {
+              "name": "工作职位",
+              "width": 8
+            },
+            {
+              "name": "工作地点",
+              "width": 8
+            },
+            {
+              "name": "身份证号码",
+              "width": 8
+            },
+            {
+              "width": 8,
+              "name": "API Key"
+            },
+            {
+              "width": 8,
+              "name": "API 密钥"
+            }
+          ]
+        },
+        {
+          "columns": [
+            {
+              "name": "列表",
+              "tabs": [
+                {
+                  "title": "扩展信息",
+                  "columns": [
+                    {
+                      "name": "扩展信息",
+                      "width": 24
+                    }
+                  ]
+                }
+              ],
+              "width": 24
+            }
+          ]
+        }
+      ]
+    },
+    "primary": "id"
+  },
+  "fields": {
+    "form": {
+      "身份证号码": {
+        "bind": "idcard",
+        "edit": {
+          "type": "Input",
+          "props": {
+            "itemProps": {
+              "tooltip": "身份证号码",
+              "rules": [
+                {
+                  "pattern": "^(\\d{18})|(\\d{14}X)$",
+                  "message": "{{label}}格式错误"
+                },
+                {
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        }
+      },
+      "英文名": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "英文名"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "en_name"
+      },
+      "API 密钥": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "pattern": "^[0-9A-Za-z@#$&*]{32}$",
+                  "message": "{{label}}应该由32位，大小写字母、数字和符号构成"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "tooltip": "API 密钥"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "secret"
+      },
+      "扩展信息": {
+        "bind": "extra",
+        "edit": {
+          "type": "CodeEditor",
+          "props": {
+            "language": "json",
+            "itemProps": {
+              "tooltip": "扩展信息"
+            },
+            "height": 200
+          }
+        },
+        "view": {
+          "compute": "scripts.ddic.compute.json.View"
+        }
+      },
+      "API Key": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "pattern": "^[0-9]{10}$",
+                  "message": " {{label}}应该由10位数字构成"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "tooltip": "API Key"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "key"
+      },
+      "工作职位": {
+        "bind": "position",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "职位"
+            }
+          },
+          "type": "Input"
+        }
+      },
+      "工号": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "工号"
+            }
+          },
+          "type": "Input"
+        },
+        "bind": "job_number"
+      },
+      "工作地点": {
+        "bind": "work_place",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "工作地点"
+            }
+          },
+          "type": "Input"
+        }
+      },
+      "user id": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "required": true,
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "type": "InputNumber"
+        },
+        "bind": "user_id"
+      }
+    }
+  },
+  "name": "用户",
+  "action": {
+    "bind": {
+      "model": "admin.user.extra",
+      "option": {
+        "withs": {}
+      }
+    }
+  }
+}

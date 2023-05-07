@@ -1,0 +1,51 @@
+{
+  "name": "部门",
+  "table": {
+    "name": "admin_dept",
+    "comment": "部门表"
+  },
+  "columns": [
+    { "label": "ID", "name": "id", "type": "ID" },
+    {
+      "label": "部门名称",
+      "name": "deptName",
+      "type": "string",
+      "length": 50,
+      "comment": "部门名称",
+      "nullable": false
+    },
+    {
+      "label": "上级部门id",
+      "name": "parentDept",
+      "type": "integer",
+      "comment": "上级部门id,department表主键id",
+      "nullable": false
+    },
+    {
+      "label": "排序",
+      "name": "orderNo",
+      "type": "integer",
+      "comment": "排序越大越靠前",
+      "nullable": false
+    },
+    {
+      "label": "备注",
+      "name": "remark",
+      "type": "string",
+      "comment": "备注",
+      "length": 200,
+      "nullable": true
+    },
+    {
+      "label": "状态",
+      "name": "status",
+      "type": "enum",
+      "comment": "备注",
+      "default": "0",
+      "option": ["1", "0"],
+      "length": 200,
+      "nullable": true
+    }
+  ],
+  "option": { "timestamps": true, "soft_deletes": false }
+}

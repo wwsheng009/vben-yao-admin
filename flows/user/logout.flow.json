@@ -1,31 +1,23 @@
 {
-    "label": "User Info",
-    "version": "1.0.0",
-    "description": "User Info",
-    "nodes": [
-        {
-            "name": "Set User Data",
-            "process": "session.set",
-            "args": [
-                "user",
-                ""
-            ]
-        },
-        {
-            "name": "Set User ID",
-            "process": "session.set",
-            "args": [
-                "user_id",
-                ""
-            ]
-        },
-        {
-            "name": "result",
-            "process": "scripts.return.Success",
-            "args": [
-                ""
-            ]
-        }
-    ],
-    "output": "{{$res.result}}"
+  "label": "User Info",
+  "version": "1.0.0",
+  "description": "User Info",
+  "nodes": [
+    {
+      "name": "Set User Data",
+      "process": "session.set",
+      "args": ["user", ""]
+    },
+    {
+      "name": "Set User ID",
+      "process": "session.set",
+      "args": ["user_id", ""]
+    },
+    {
+      "name": "result",
+      "process": "scripts.return.Success",
+      "args": [""]
+    }
+  ],
+  "output": "{{$res.result}}"
 }

@@ -1,22 +1,18 @@
 {
-    "label": "User Info",
-    "version": "1.0.0",
-    "description": "User Info",
-    "nodes": [
-        {
-            "name": "Get",
-            "process": "session.Get",
-            "args": [
-                "user"
-            ]
-        },
-        {
-            "name": "result",
-            "process": "scripts.return.Success",
-            "args": [
-                "{{$res.Get}}"
-            ]
-        }
-    ],
-    "output": "{{$res.result}}"
+  "label": "User Info",
+  "version": "1.0.0",
+  "description": "User Info",
+  "nodes": [
+    {
+      "name": "Get",
+      "process": "session.Get",
+      "args": ["user"]
+    },
+    {
+      "name": "result",
+      "process": "scripts.return.Success",
+      "args": ["{{$res.Get}}"]
+    }
+  ],
+  "output": "{{$res.result}}"
 }

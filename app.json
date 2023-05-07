@@ -1,20 +1,20 @@
 {
   "xgen": "1.0",
   "name": "::Demo Application",
-  "short": "::Demo",
-  "description": "::Another yao application",
-  "version": "0.10.2",
-  "adminRoot": "admin",
-  "setup": "scripts.demo.Data",
   "menu": {
     "process": "flows.app.menu",
     "args": [
       "demo"
     ]
   },
+  "setup": "studio.model.cmd.Setup",
+  "adminRoot": "admin",
   "optional": {
     "hideNotification": true,
     "hideSetting": false,
     "remoteCache": false
-  }
+  },
+  "short": "::Demo",
+  "description": "::Another yao application",
+  "version": "0.10.3"
 }

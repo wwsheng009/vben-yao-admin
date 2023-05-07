@@ -1,0 +1,366 @@
+{
+  "fields": {
+    "filter": {
+      "name": {
+        "bind": "where.name.match",
+        "edit": {
+          "props": {
+            "placeholder": "请输入name"
+          },
+          "type": "Input",
+          "compute": "Trim"
+        }
+      }
+    },
+    "table": {
+      "path": {
+        "view": {
+          "type": "Text",
+          "props": {}
+        },
+        "edit": {
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "required": true
+                }
+              ],
+              "tooltip": "路由"
+            }
+          },
+          "type": "Input",
+          "bind": "path"
+        },
+        "bind": "path"
+      },
+      "id": {
+        "view": {
+          "type": "Text",
+          "props": {}
+        },
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "ID"
+            }
+          },
+          "type": "Input",
+          "bind": "id"
+        },
+        "bind": "id"
+      },
+      "icon": {
+        "view": {
+          "compute": "scripts.file.upload.View",
+          "props": {},
+          "type": "Image"
+        },
+        "edit": {
+          "props": {
+            "$api": {
+              "process": "fs.system.Upload"
+            },
+            "itemProps": {
+              "tooltip": "图标"
+            },
+            "maxCount": 100,
+            "filetype": "image"
+          },
+          "type": "Upload",
+          "compute": {
+            "process": "scripts.file.upload.Edit",
+            "args": [
+              "$C(row)",
+              "icon",
+              "admin_menu"
+            ]
+          }
+        },
+        "bind": "icon"
+      },
+      "blocks": {
+        "bind": "blocks",
+        "view": {
+          "props": {
+            "checkedValue": true,
+            "unCheckedChildren": "否",
+            "unCheckedValue": false,
+            "checkedChildren": "是"
+          },
+          "type": "Switch"
+        }
+      },
+      "状态": {
+        "bind": "status",
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "菜单状态 enabled 开启, disabled 关闭",
+              "rules": [
+                {
+                  "enum": [
+                    "enabled",
+                    "disabled"
+                  ],
+                  "type": "enum"
+                }
+              ],
+              "initialValue": "enabled"
+            },
+            "options": [
+              {
+                "value": "enabled",
+                "label": "::enabled"
+              },
+              {
+                "label": "::disabled",
+                "value": "disabled"
+              }
+            ],
+            "placeholder": "请选择状态"
+          },
+          "type": "Select"
+        },
+        "view": {
+          "props": {
+            "options": [
+              {
+                "value": "enabled",
+                "label": "::enabled"
+              },
+              {
+                "value": "disabled",
+                "label": "::disabled"
+              }
+            ],
+            "placeholder": "请选择状态"
+          },
+          "type": "Tag"
+        }
+      },
+      "visible_menu": {
+        "bind": "visible_menu",
+        "view": {
+          "type": "Switch",
+          "props": {
+            "checkedChildren": "是",
+            "checkedValue": true,
+            "unCheckedChildren": "否",
+            "unCheckedValue": false
+          }
+        }
+      },
+      "parent": {
+        "edit": {
+          "props": {
+            "itemProps": {
+              "tooltip": "父节点",
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "type": "InputNumber",
+          "bind": "parent"
+        },
+        "bind": "parent",
+        "view": {
+          "type": "Text",
+          "props": {}
+        }
+      },
+      "name": {
+        "view": {
+          "props": {},
+          "type": "Text"
+        },
+        "edit": {
+          "type": "Input",
+          "bind": "name",
+          "props": {
+            "itemProps": {
+              "rules": [
+                {
+                  "required": true
+                }
+              ],
+              "tooltip": "名称"
+            }
+          }
+        },
+        "bind": "name"
+      },
+      "rank": {
+        "bind": "rank",
+        "view": {
+          "type": "Text",
+          "props": {}
+        },
+        "edit": {
+          "bind": "rank",
+          "props": {
+            "itemProps": {
+              "tooltip": "排列",
+              "rules": [
+                {
+                  "type": "integer"
+                }
+              ],
+              "initialValue": 9999
+            }
+          },
+          "type": "InputNumber"
+        }
+      }
+    }
+  },
+  "name": "菜单",
+  "action": {
+    "bind": {
+      "model": "admin.menu",
+      "option": {
+        "option": {
+          "form": "admin.menu"
+        },
+        "withs": {
+          "children": {}
+        }
+      }
+    }
+  },
+  "layout": {
+    "table": {
+      "columns": [
+        {
+          "width": 160,
+          "name": "id"
+        },
+        {
+          "name": "parent",
+          "width": 250
+        },
+        {
+          "name": "name",
+          "width": 160
+        },
+        {
+          "width": 160,
+          "name": "icon"
+        },
+        {
+          "name": "blocks",
+          "width": 250
+        },
+        {
+          "width": 250,
+          "name": "visible_menu"
+        },
+        {
+          "name": "path",
+          "width": 160
+        },
+        {
+          "name": "rank",
+          "width": 160
+        },
+        {
+          "name": "状态",
+          "width": 160
+        }
+      ],
+      "operation": {
+        "fold": false,
+        "actions": [
+          {
+            "title": "查看",
+            "icon": "icon-eye",
+            "action": [
+              {
+                "type": "Common.openModal",
+                "payload": {
+                  "Form": {
+                    "type": "view",
+                    "model": "admin.menu_view"
+                  }
+                },
+                "name": "OpenModal"
+              }
+            ]
+          },
+          {
+            "action": [
+              {
+                "type": "Common.openModal",
+                "payload": {
+                  "Form": {
+                    "type": "edit",
+                    "model": "admin.menu"
+                  }
+                },
+                "name": "OpenModal"
+              }
+            ],
+            "title": "编辑",
+            "icon": "icon-edit-2"
+          },
+          {
+            "title": "删除",
+            "icon": "icon-trash-2",
+            "action": [
+              {
+                "payload": {
+                  "title": "确认删除",
+                  "content": "删除后不可撤销！"
+                },
+                "name": "Confirm",
+                "type": "Common.confirm"
+              },
+              {
+                "type": "Table.delete",
+                "payload": {
+                  "model": "admin.menu"
+                },
+                "name": "Delete"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "primary": "id",
+    "header": {
+      "preset": {},
+      "actions": []
+    },
+    "filter": {
+      "columns": [
+        {
+          "width": 4,
+          "name": "name"
+        }
+      ],
+      "actions": [
+        {
+          "width": 3,
+          "action": [
+            {
+              "name": "OpenModal",
+              "type": "Common.openModal",
+              "payload": {
+                "Form": {
+                  "type": "edit",
+                  "model": "admin.menu"
+                }
+              }
+            }
+          ],
+          "title": "添加",
+          "icon": "icon-plus"
+        }
+      ]
+    }
+  }
+}
