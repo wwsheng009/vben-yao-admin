@@ -251,6 +251,13 @@
       "comment": "简介",
       "length": 200,
       "nullable": true
+    },{
+      "label": "备注",
+      "name": "remark",
+      "type": "string",
+      "comment": "备注",
+      "length": 200,
+      "nullable": true
     }
   ],
   "relations": {},

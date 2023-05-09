@@ -1,0 +1,21 @@
+{
+    "name": "User API",
+    "version": "1.0.0",
+    "description": "User API",
+    "group": "vben/cascader",
+    "guard": "bearer-jwt",
+    "paths": [
+      {
+        "path": "/getAreaRecord",
+        "guard": "-",
+        "method": "POST",
+        "process": "scripts.cascader.getAreaRecord",
+        "in":[":payload"],
+        "out": {
+          "status": 200,
+          "type": "application/json"
+        }
+      }
+    ]
+  }
+  

@@ -1,29 +1,35 @@
+// scripts.demo.run;
+function run() {
+  user();
+  role();
+  dept();
+  menu();
+}
+
+// scripts.demo.user;
 function user() {
-  const user = [
+  const data = [
     {
-      id: 1,
       name: "Robert",
       nickname: "Victor",
       mobile: "13439882351",
       password: "A+123abc",
     },
     {
-      id: 2,
       name: "Julian",
       nickname: "Victor",
       mobile: "18696486865",
       password: "A+123abc",
     },
     {
-      id: 3,
       name: "vben",
       nickname: "Vben",
       mobile: "18696432134",
-      password: "123456",
+      password: "A+123456c",
     },
   ];
 
-  const map = Process("xiang.helper.ArraySplit", user);
+  const map = Process("xiang.helper.ArraySplit", data);
 
   const rc = Process("models.admin.user.Insert", map.columns, map.values);
 }

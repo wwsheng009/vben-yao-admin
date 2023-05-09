@@ -27,7 +27,7 @@ function AcountList(page, pagesize, deptId, account) {
       "nickname",
       "role",
       "status",
-      "remark",
+      "introduction",
       "created_at as createTime",
     ],
     wheres,

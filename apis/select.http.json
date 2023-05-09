@@ -1,0 +1,21 @@
+{
+    "name": "User API",
+    "version": "1.0.0",
+    "description": "User API",
+    "group": "vben/select",
+    "guard": "bearer-jwt",
+    "paths": [
+      {
+        "path": "/getDemoOptions",
+        "guard": "-",
+        "method": "GET",
+        "process": "scripts.select.getDemoOptions",
+        "in":["$query.keyword","$query.count"],
+        "out": {
+          "status": 200,
+          "type": "application/json"
+        }
+      }
+    ]
+  }
+  
